@@ -1,6 +1,6 @@
 # Project 6: Route
 
-This is the directions document for Project 6 Route in CompSci 201 at Duke University, Fall 2022. [This document details the workflow](hhttps://coursework.cs.duke.edu/cs-201-fall-22/resources-201/-/blob/main/projectWorkflow.md) for downloading the starter code for the project, updating your code on coursework using Git, and ultimately submitting to Gradescope for autograding.
+This is the directions document for Project 6 Route in CompSci 201 at Duke University, Spring 2023. [This document details the workflow](https://coursework.cs.duke.edu/cs-201-spring-23/resources-201/-/blob/main/projectWorkflow.md) for downloading the starter code for the project, updating your code on coursework using Git, and ultimately submitting to Gradescope for autograding.
 
 For this project, **you are allowed to work with a partner** (that is, in a group of two). If you are working with a partner, read the details in the expandable section below on how to collaborate effectively using Git. 
 
@@ -46,7 +46,7 @@ Additional resources: if you have any concerns about using Git with a partner, p
     - [Graph Data](#graph-data)
 - [Part 1: Implementing `GraphProcessor`](#part-1-implementing-graphprocessor)
 - [Part 2: Creating `GraphDemo`](#part-2-creating-graphdemo)
-- [Submitting, Reflect, Grading](#submitting-reflect-grading)
+- [Submitting and Grading](#submitting-reflect-grading)
 
 ## Project Introduction
 
@@ -270,13 +270,12 @@ In your recording, explain what you are doing and what the code is doing while r
 
 **[See this video](https://duke.hosted.panopto.com/Panopto/Pages/Viewer.aspx?id=d3f2cc7a-902a-499f-850b-af4e014f8a07) with an example of a completed `GraphDemo` at work.**
 
-## Submitting, Reflect, Grading
+## Submitting and Grading
 
 Commit and push your code often as you develop. To submit:
 
 1. Submit your code on gradescope to the autograder. If you worked with a partner, you and your partner will make a **single submission together on gradescope**. Refer to [this document](https://docs.google.com/document/d/e/2PACX-1vREK5ajnfEAk3FKjkoKR1wFtVAAEN3hGYwNipZbcbBCnWodkY2UI1lp856fz0ZFbxQ3yLPkotZ0U1U1/pub) for submitting to Gradescope with a partner. 
 2. Submit a link to your demo in the separate Demo assignment. **Be sure that your link is valid and your video is viewable without sign-in.** You can host your demo anywhere you like (unlisted youtube, zoom cloud, google drive, Duke box, ...) as long as we can access it from a link and view it. Again, if you worked with a partner, you and your partner will make a single combined submission.
-3. Complete the brief [reflect form](https://forms.office.com/Pages/ResponsePage.aspx?id=TsVyyzFKnk2xSh6jbfrJTErNjWEU70pGg_ytfEVEPi5UOVlEQUYwSE9aWFUzWUswSjA4UDRVUFY2Vy4u).
 
 There is no analysis for this project.
 
