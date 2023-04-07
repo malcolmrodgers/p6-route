@@ -118,15 +118,16 @@ public class TestUSGraphProcessor {
 
 	/**
      * Tests that driver returns true if two inputs are connected in the graph
+	 * Tests only if .routeDistsance() is correct (i.e. can pass even if .route() is incorect)
      */
 	@Test
 	public void testConnected() {
 		// San Juan PR to Seattle WA
 		assertFalse(usDriver.connected(new Point(18.399426, -66.071025), new Point(47.625719, -122.328043)), 
-			"You mistakenly claim two points representing San Juan PR and Seattle WA's nearest points, respectively, are connected. This test is designed if .connected() is correct, even if .nearestPoint() is faulty"); 
+			"Your algorithm mistakenly claims two points representing San Juan PR and Seattle WA's nearest points, respectively, are connected. This tests if .connected() is correct, even if .nearestPoint() is faulty"); 
 		// Durham NC to Raleigh NC
 		assertTrue(usDriver.connected(new Point(35.989709, -78.902124), new Point(35.834585, -78.638592)),
-		   "You mistakenly claim two points representing Durham NC and Raleigh NC's nearest points, respectively, are not connected. This test is designed if .connected() is correct, even if .nearestPoint() is faulty"); 
+		    "Your algorithm mistakenly claims two points representing Durham NC and Raleigh NC's nearest points, respectively, are not connected. This tests if .connected() is correct, even if .nearestPoint() is faulty"); 
 	}
  
 	// helper method to check if a point's distance to input is within 3% of the true nearest point's distance to input

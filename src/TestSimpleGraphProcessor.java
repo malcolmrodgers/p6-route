@@ -114,15 +114,19 @@ public class TestSimpleGraphProcessor {
 
     /**
      * Tests that driver returns true if two inputs are connected in the graph
+	 * Uses hardcoded nearestPoints, has no dependency on student's nearestPoint() implementaiton
      */
 	@Test
 	public void testConnected() {
 		// A to J
 		assertFalse(simpleDriver.connected(new Point(2, -1), new Point(-1, 1)), 
-			"You mistakenly claim two points representing San Juan PR and Seattle WA's nearest points, respectively, are connected. This test is designed if .connected() is correct, even if .nearestPoint() is faulty"); 
+			"Your algorithm mistakenly claims two points representing A and J's nearest points, respectively, are connected. This test tests if .connected() is correct, even if .nearestPoint() is faulty"); 
+		// B to I
+			assertFalse(simpleDriver.connected(new Point(2, 0), new Point(-1, 0)), 
+			"Your algorithm mistakenly claims two points representing B and I's nearest points, respectively, are connected. This test tests if .connected() is correct, even if .nearestPoint() is faulty"); 
 		// G to H
 		assertTrue(simpleDriver.connected(new Point(0, 0), new Point(-1, -1)),
-		   "You mistakenly claim two points representing Durham NC and Raleigh NC's nearest points, respectively, are not connected. This test is designed if .connected() is correct, even if .nearestPoint() is faulty"); 
+		    "Your algorithm mistakenly claims two points representing G and H's nearest points, respectively, are not connected. This test tests if .connected() is correct, even if .nearestPoint() is faulty"); 
 	}
  
     // helper method to check if a point's distance to input is within 3% of the true nearest point's distance to input
