@@ -277,16 +277,7 @@ Commit and push your code often as you develop. To submit:
 1. Submit your code on gradescope to the autograder. If you worked with a partner, you and your partner will make a **single submission together on gradescope**. Refer to [this document](https://docs.google.com/document/d/e/2PACX-1vREK5ajnfEAk3FKjkoKR1wFtVAAEN3hGYwNipZbcbBCnWodkY2UI1lp856fz0ZFbxQ3yLPkotZ0U1U1/pub) for submitting to Gradescope with a partner. 
 2. Submit a link to your demo in the separate Demo assignment. **Be sure that your link is valid and your video is viewable without sign-in.** You can host your demo anywhere you like (unlisted youtube, zoom cloud, google drive, Duke box, ...) as long as we can access it from a link and view it. Again, if you worked with a partner, you and your partner will make a single combined submission.
 
-There is no analysis for this project.
-
-This project will be graded as follows:
-
-| Points   | Grading Category |
-| ------   | ---------------- |
-| 35       | GraphProcessor code (autograded)   |
-| 8        | GraphDemo recording (TA graded)    |
-
-The rubric for grading your GraphDemo recording is as follows:
+The first part, `GraphProcessor`, will be autograded for the correctness and efficiency of the code. Your demo will be graded by TAs according to the following rubric, and will be counted in the analysis category for this project. There are no additional analysis questions, just the demo.
 
 | Points | Requirement |
 | ------ | ----------- |
