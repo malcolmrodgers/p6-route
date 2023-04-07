@@ -46,7 +46,7 @@ The `--wait` command means that whenever `git` opens something in VS Code for yo
     - [Graph Data](#graph-data)
 - [Part 1: Implementing `GraphProcessor`](#part-1-implementing-graphprocessor)
 - [Part 2: Creating `GraphDemo`](#part-2-creating-graphdemo)
-- [Submitting and Grading](#submitting-reflect-grading)
+- [Submitting and Grading](#submitting-and-grading)
 
 ## Project Introduction
 
