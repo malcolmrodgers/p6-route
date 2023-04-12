@@ -250,7 +250,16 @@ Using this straight-line heuristic, rather than just exploring the closest unexp
 
 The starter code for `GraphDemo.java` only includes an empty `main` method. Feel free to organize `GraphDemo` however you see fit - it will not be autograded. **Running your `GraphDemo` `main` method should produce a demonstration of the functionality of your project on the USA highway network, including (at a minimum) the following:** 
 
-1. A user should be able to indicate two cities in the United States. An extensive list of latitude-longitude coordinates for US Cities has been included in `data/uscities.csv` (that the file is a `.csv` means each row contains an entry where the values are separated/delimited by commas `,`). This data was obtained from [simplemaps.com](https://simplemaps.com/data/us-cities) for educational use only. Choose two that are reasonably far apart (say, 1,000 miles or more) for the demo. You can choose how a user indicates cities: They might input the name of the cities, or maybe their coordinates, up to you.
+1. A user should be able to indicate two cities in the United States. Choose two that are reasonably far apart (say, 1,000 miles or more) for the demo. You can choose how a user indicates cities: They might input the name of the cities, or maybe their coordinates, up to you. More details on how to do this in the expandable section below.
+
+<details><summary>Details on user input</summary>
+
+An extensive list of latitude-longitude coordinates for US Cities has been included in `data/uscities.csv` (that the file is a `.csv` means each row contains an entry where the values are separated/delimited by commas `,`). This data was obtained from [simplemaps.com](https://simplemaps.com/data/us-cities) for educational use only. 
+
+The example demo recording allowed the user to input their source and destination cities by typing them into the terminal. You are welcome to implement whatever input format you prefer, but this is probably the simplest. For example, you can create a `Scanner` object initialized to `System.in` to read user input from the terminal. See the documentation for the java [`Scanner` class here](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Scanner.html) which includes an example reading from `System.in`.
+
+Note that if you are running directly from VS Code and want to get user input form the terminal, you need to make sure VS Code is configured to use the terminal for standard input/output. That is the default, but you may have optionally changed to use the debug console, in which case you would want to switch back. [See the directions here](https://coursework.cs.duke.edu/cs-201-spring-23/resources-201/-/blob/main/installingSoftware.md#optional-change-program-output-from-console-to-terminal) and make sure you have selected `integratedTerminal`.
+</details>
 
 2. For each of the user indicated points, the demo should locate the closest vertex of the road network from `usa.graph`, the large data file containing the highway network of the USA.
 
@@ -275,7 +284,7 @@ Commit and push your code often as you develop. To submit:
 1. Submit your code on gradescope to the autograder. If you worked with a partner, you and your partner will make a **single submission together on gradescope**. Refer to [this document](https://docs.google.com/document/d/e/2PACX-1vREK5ajnfEAk3FKjkoKR1wFtVAAEN3hGYwNipZbcbBCnWodkY2UI1lp856fz0ZFbxQ3yLPkotZ0U1U1/pub) for submitting to Gradescope with a partner. 
 2. Submit a link to your demo in the separate Demo assignment. **Be sure that your link is valid and your video is viewable without sign-in.** You can host your demo anywhere you like (unlisted youtube, zoom cloud, google drive, Duke box, ...) as long as we can access it from a link and view it. Again, if you worked with a partner, you and your partner will make a single combined submission.
 
-The first part, `GraphProcessor`, will be autograded for the correctness and efficiency of the code. Your demo will be graded by TAs according to the following rubric, and will be counted in the analysis category for this project. There are no additional analysis questions, just the demo.
+The first part, `GraphProcessor`, will be autograded for the correctness and efficiency of the code. Most of the points are for correctness, so focus on that first. Your demo will be graded by TAs according to the following rubric, and will be counted in the analysis category for this project. There are no additional analysis questions, just the demo.
 
 | Points | Requirement |
 | ------ | ----------- |
