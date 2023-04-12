@@ -5,7 +5,7 @@ This is the directions document for Project 6 Route in CompSci 201 at Duke Unive
 For this project, **you are allowed to work with a partner** (that is, in a group of two). If you are working with a partner, read the details in the expandable section below on how to collaborate effectively using Git. 
 
 <details>
-<summary>Details on Git with a Partner for P4</summary>
+<summary>Details on Git with a Partner</summary>
 
 You may find it helpful to begin by reading the Working Together section of the [Git tutorial](https://gitlab.oit.duke.edu/academic-technology/cct/-/tree/master/git) from the Duke Colab. For more, see the [Git tutoraial by Gitlab](https://docs.gitlab.com/ee/tutorials/make_your_first_git_commit.html) including the link to an [extensive video tutorial](https://www.youtube.com/watch?v=4lxvVj7wlZw) if you prefer that.
 
@@ -192,7 +192,7 @@ A simple implementation of the `nearestPoint` method should have $`O(N)`$ runtim
 
 This is a famous algorithmic problem known as [nearest neighbor search](https://en.wikipedia.org/wiki/Nearest_neighbor_search), relevant in many geometric, mapping, and machine learning applications. Many algorithms and data structures have been studied for improving the linear runtime complexity of the simple solution. Some rely on approximation, meaning they no longer guarantee to find the closest point, just something approximately closest. 
 
-The exact methods for finding the nearest neighbor largely rely on data structures for partitioning the search space in a hierarchical fashion. At a high level, the idea is to preprocess the points into small regions and then only search among the points in the particular small region near the query point. There are many ways one could put that intuition into practice, but all of them require reasoning carefully about when one can be sure that the nearest point could or could not be in a particular region. Examples of such data structures include [Quad Trees](#https://en.wikipedia.org/wiki/Quadtree) and [k-d trees](#https://en.wikipedia.org/wiki/K-d_tree), as well as things as simple as a grid over the search space.
+The exact methods for finding the nearest neighbor largely rely on data structures for partitioning the search space in a hierarchical fashion. The idea is to preprocess the points into small regions and then only search among the points in the particular small region near the query point. The simplest way to partition the space is into a grid, searching only among points in the grid cells surrounding the query point. Alternative hierarchical tree-based decompositions include [Quad Trees](#https://en.wikipedia.org/wiki/Quadtree) and [k-d trees](#https://en.wikipedia.org/wiki/K-d_tree).
 
 </details>
 
@@ -206,13 +206,13 @@ The runtime complexity of the method should be linear in `route.size()`, that is
 
 This method takes two points `p1` and `p2` and should return `true` if the points are connected, meaning there exists a path in the graph (a sequence of edges) from `p1` to `p2`. Otherwise, the method should return `false`, including if `p1` or `p2` are not themselves points in the graph. You may test correctness using `testConnected()` in JUnit.
 
-This method will require you to search in the graph itself, using, for example, a depth-first search (DFS) or similar approach. The runtime complexity of your implementation should be at most $`O(N+M)`$ where $`N`$ is the number of vertices in the graph and $`M`$ is the number of edges in the graph. In other words, the runtime complexity should be at most linear in the size of the graph. Note that the autograder has efficiency tests for full credit. 
+You will get full credit for correctness (most of the points) if you implement `connected` by searching in the graph, for example, using a depth-first search (DFS) with linear runtime complexity $`O(N+M)`$ where $`N`$ is the number of vertices in the graph and $`M`$ is the number of edges in the graph.
 
-It is possible make the runtime of `connected` much faster than linear by pre-processing the graph during `initialize` to store information about the connected components. This is not required for credit, but if you have completed the project and are interested in optimizing this method to go beyond what is required, see the expandable section below.
+In order to get full credit for efficiency, you should not repeat this linear time search as part of `connected` itself. Instead, you should search in the graph during `initialize` to store information about the connected components (subsets of the vertices that are connected to one another) so that you can answer `connected` queries in $`O(1)`$ time. See the expandable section below for more ideas on this optimization.
 
-<details><summary>OPTIONAL: Going beyond O(N+M) efficiency connected</summary>
+<details><summary>Optimizing the efficiency of connected</summary>
 
-Pre-processing is the idea of doing some extra work *once* in order to save information that allows several subsequent operations to be completed more efficiently. In this case, it is possible to run a single $`O(N+M)`$ algorithm during `initialize` that stores information about the *connected components* of the graph, so that subsequent repeated calls to `connected` are much more efficient. A *connected component* is a subset of vertices that are all connected, meaning reachable from one another by paths. For undirected graphs, the question of whether two vertices are connected is equivalent to asking whether they are in the same connected component.
+Pre-processing is the idea of doing some extra work *once* in order to save information that allows several subsequent operations to be completed more efficiently. In this case, it is possible to run a single $`O(N+M)`$ search algorithm during `initialize` that stores information about the *connected components* of the graph, so that subsequent repeated calls to `connected` are much more efficient. A *connected component* is a subset of vertices that are all connected, meaning reachable from one another by paths. For undirected graphs, the question of whether two vertices are connected is equivalent to asking whether they are in the same connected component.
 
 Two ideas for how to compute the connected components include:
 
