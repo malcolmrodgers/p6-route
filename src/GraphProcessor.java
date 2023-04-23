@@ -1,6 +1,13 @@
 import java.security.InvalidAlgorithmParameterException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Scanner;
+import java.util.Set;
+import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 
 /**
  * Models a weighted graph of latitude-longitude points
@@ -10,6 +17,10 @@ import java.io.FileInputStream;
  *
  */
 public class GraphProcessor {
+    //Make instance variables
+    private HashMap<Point, Set<Point>> aList = new HashMap<>();
+    private Point[] points;
+
     /**
      * Creates and initializes a graph from a source data
      * file in the .graph format. Should be called
@@ -17,8 +28,40 @@ public class GraphProcessor {
      * @param file a FileInputStream of the .graph file
      * @throws Exception if file not found or error reading
      */
-    public void initialize(FileInputStream file) throws Exception {
-        // TODO: Implement initialize
+
+    public void initialize(FileInputStream file) throws FileNotFoundException {
+        //create scanner to read from input stream
+        Scanner readFile = new Scanner(file);
+        points = new Point[readFile.nextInt()];
+
+        //number of verticies and edges
+        int v = points.length;
+        int e = readFile.nextInt();
+
+        //add each point to adj. list to create graph
+        for (int i=0; i<v; i++) {
+            Point p = new Point(readFile.nextDouble(), readFile.nextDouble());
+            points[i] = p; //stores each point in array inst. var
+            aList.put(p, new HashSet<>()); 
+        }
+
+        //add neighbors to graph using edge data from file
+        while (readFile.hasNextLine()) {
+            String next = readFile.nextLine();
+            String[] info = new String[2];
+            info = next.split(" ");  //Read next line, split by whitespace, and store result in temp. string[]
+    
+            //store references to endpoints of given edge
+            Point x = points[Integer.parseInt(info[0])]; 
+            Point y = points[Integer.parseInt(info[1])];
+
+            //undir. graph, so add endpoints to both sets
+            aList.get(x).add(y);
+            aList.get(y).add(x);
+        }
+
+        readFile.close();
+        System.out.println(aList);
     }
 
 
