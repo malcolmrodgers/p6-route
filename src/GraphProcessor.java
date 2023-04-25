@@ -1,5 +1,6 @@
 import java.security.InvalidAlgorithmParameterException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -18,8 +19,20 @@ import java.io.FileNotFoundException;
  */
 public class GraphProcessor {
     //Make instance variables
-    private HashMap<Point, Set<Point>> aList = new HashMap<>();
-    private Point[] points;
+    private static HashMap<Point, HashSet<Point>> aList = new HashMap<>();
+    private static Point[] points;
+
+    //main method for testing
+    public static void main(String[] args) throws Exception{
+        GraphProcessor gp = new GraphProcessor();
+        File graphData = new File("data/simple.graph");
+        FileInputStream stream = new FileInputStream(graphData);
+
+        gp.initialize(stream);
+        
+        System.out.println(aList);
+        System.out.println(Arrays.toString(points));
+    }
 
     /**
      * Creates and initializes a graph from a source data
@@ -28,42 +41,57 @@ public class GraphProcessor {
      * @param file a FileInputStream of the .graph file
      * @throws Exception if file not found or error reading
      */
+    public void initialize(FileInputStream file) throws Exception{
+        //Check for bad file, handle exception
+        /* 
+        if (file.read() == -1) {  //TODO: Fix this, for some reason this moves pointer over one byte
+            file.close();          //may be able to run without and just check for null with scanner
+            throw new Exception("Error reading graph file");
+        }
+        */
 
-    public void initialize(FileInputStream file) throws FileNotFoundException {
         //create scanner to read from input stream
+        //if first token is not an int, file format is incorrect
         Scanner readFile = new Scanner(file);
-        points = new Point[readFile.nextInt()];
+        if (!readFile.hasNextInt()) {
+            readFile.close();
+            file.close();
+            throw new Exception("Graph file is incorrect format");
+        }
 
-        //number of verticies and edges
-        int v = points.length;
+        //Store sizes
+        int v = readFile.nextInt();
         int e = readFile.nextInt();
+        points = new Point[v];
 
-        //add each point to adj. list to create graph
+        readFile.nextLine(); //blank line in file after sizes for some reason. this skips it
+
+        //add each point to adj. list with empty neighbors set
         for (int i=0; i<v; i++) {
-            Point p = new Point(readFile.nextDouble(), readFile.nextDouble());
+            String [] info = readFile.nextLine().split(" ");
+            //System.out.println(Arrays.toString(info));
+            Point p = new Point(Double.parseDouble(info[1]), Double.parseDouble(info[2]));
             points[i] = p; //stores each point in array inst. var
             aList.put(p, new HashSet<>()); 
         }
 
         //add neighbors to graph using edge data from file
+        //If no next int, then no neighbors
+        if (readFile.hasNextInt()) {
         while (readFile.hasNextLine()) {
-            String next = readFile.nextLine();
-            String[] info = new String[2];
-            info = next.split(" ");  //Read next line, split by whitespace, and store result in temp. string[]
-    
-            //store references to endpoints of given edge
-            Point x = points[Integer.parseInt(info[0])]; 
+            String s = readFile.nextLine();
+            String[] info = s.split(" ");
+            Point x = points[Integer.parseInt(info[0])];
             Point y = points[Integer.parseInt(info[1])];
 
             //undir. graph, so add endpoints to both sets
             aList.get(x).add(y);
             aList.get(y).add(x);
         }
-
-        readFile.close();
-        System.out.println(aList);
     }
-
+        file.close();
+        readFile.close();
+    }
 
     /**
      * Searches for the point in the graph that is closest in
@@ -73,7 +101,20 @@ public class GraphProcessor {
      */
     public Point nearestPoint(Point p) {
         // TODO: Implement nearestPoint
-        return null;
+        //initialize dist to infinity and return point
+        Double nearest = Double.POSITIVE_INFINITY;
+        Point ret = p;
+
+        //for every point call .distance(), replace if lower than current nearest val
+        for (Point q : aList.keySet()) { 
+            Double dist = q.distance(p);
+            if (dist < nearest) {
+                nearest = dist;
+                ret = q;
+            }
+        }
+
+        return ret;
     }
 
 
