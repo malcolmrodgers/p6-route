@@ -1,11 +1,15 @@
 import java.security.InvalidAlgorithmParameterException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.PriorityQueue;
 import java.util.Scanner;
 import java.util.Set;
+import java.util.Stack;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -131,11 +135,9 @@ public class GraphProcessor {
         for (int i=0; i<route.size()-1; i++) {
             sum += route.get(i).distance(route.get(i+1));
         }
-
         return sum;
     }
     
-
     /**
      * Checks if input points are part of a connected component
      * in the graph, that is, can one get from one to the other
@@ -145,8 +147,23 @@ public class GraphProcessor {
      * @return true if p2 is reachable from p1 (and vice versa)
      */
     public boolean connected(Point p1, Point p2) {
-        // TODO: Implement connected
-        return false;
+        HashSet<Point> visited = new HashSet<>();
+        Stack<Point> myStack = new Stack<>();
+
+        myStack.push(p1);
+        Point current = p1;
+
+        while (!visited.contains(p2) && !myStack.isEmpty()) {
+            current = myStack.pop();
+            visited.add(current);
+
+            for (Point p : aList.get(current)) {
+                if (!visited.contains(p)) {
+                    myStack.push(p);
+                }
+            }
+        }
+        return visited.contains(p2);
     }
 
 
@@ -163,9 +180,55 @@ public class GraphProcessor {
      * either because start is not connected to end or because start equals end.
      */
     public List<Point> route(Point start, Point end) throws InvalidAlgorithmParameterException {
-        // TODO: Implement route
-        return null;
+        if (start == end || start.distance(end) == 0) {
+            throw new InvalidAlgorithmParameterException("No path silly");
+        }
+        if (!connected(start, end)) {
+            throw new InvalidAlgorithmParameterException("start and end not connected");
+        }
+
+        Map<Point, Double> distance = new HashMap<>();
+        List<Point> ret = new ArrayList<>();
+
+        //Prioritize points by distance (val in map)
+        //PQueue for bfs
+        Comparator<Point> comp = (a, b) -> Double.compare(distance.get(a), distance.get(b));
+        PriorityQueue<Point> toExplore = new PriorityQueue<>(comp);
+        Map<Point, Point> previous = new HashMap<>();
+
+        Point current = start;
+        toExplore.add(start);
+        distance.put(start, 0.0);
+
+        while (!toExplore.isEmpty()) {
+            current = toExplore.remove();
+            for (Point a : aList.get(current)) {
+                double dist = current.distance(a);
+                if (!distance.containsKey(a) || distance.get(a) > distance.get(current) + dist) {
+                    distance.put(a, distance.get(current) + dist);
+                    previous.put(a, current);
+                    toExplore.add(a);
+            }
+        }
     }
 
-    
+    ret.add(end);
+    Point p = previous.get(end);
+    ret.add(p);
+
+    for (Point s : previous.keySet()) {
+        if (previous.get(p) == null) {
+            break;
+        }
+        p = previous.get(p);
+        ret.add(p);
+    }
+
+    ArrayList<Point> ret2 = new ArrayList<>();
+    for (int i = ret.size()-1; i >= 0; i--) {
+        ret2.add(ret.get(i));
+    }
+    return ret2;
 }
+}
+
