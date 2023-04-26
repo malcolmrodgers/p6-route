@@ -152,13 +152,13 @@ public class GraphProcessor {
 
         myStack.push(p1);
         Point current = p1;
+        visited.add(current);
 
         while (!visited.contains(p2) && !myStack.isEmpty()) {
             current = myStack.pop();
-            visited.add(current);
-
             for (Point p : aList.get(current)) {
                 if (!visited.contains(p)) {
+                    visited.add(p);
                     myStack.push(p);
                 }
             }

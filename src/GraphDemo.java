@@ -10,7 +10,7 @@ import java.util.Scanner;
  * To do: Add your name(s) as authors
  */
 public class GraphDemo {
-    private static void main(String[] args) throws Exception {
+    public static void main(String[] args) throws Exception {
         GraphProcessor gp = new GraphProcessor();
         File data = new File("data/usa.graph");
         FileInputStream stream = new FileInputStream(data);
