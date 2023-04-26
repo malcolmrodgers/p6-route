@@ -44,7 +44,7 @@ public class GraphProcessor {
     public void initialize(FileInputStream file) throws Exception{
         //Check for bad file, handle exception
         /* 
-        if (file.read() == -1) {  //TODO: Fix this, for some reason this moves pointer over one byte
+        if (file.read() == -1) {  //TODO: Fix this, for some reason this moves pointer over one byte?
             file.close();          //may be able to run without and just check for null with scanner
             throw new Exception("Error reading graph file");
         }
@@ -100,7 +100,6 @@ public class GraphProcessor {
      * @return The closest point in the graph to p
      */
     public Point nearestPoint(Point p) {
-        // TODO: Implement nearestPoint
         //initialize dist to infinity and return point
         Double nearest = Double.POSITIVE_INFINITY;
         Point ret = p;
@@ -128,8 +127,12 @@ public class GraphProcessor {
      * @return The distance to get from start to end
      */
     public double routeDistance(List<Point> route) {
-        // TODO Implement routeDistance
-        return 0.0;
+        double sum = 0.0;
+        for (int i=0; i<route.size()-1; i++) {
+            sum += route.get(i).distance(route.get(i+1));
+        }
+
+        return sum;
     }
     
 
