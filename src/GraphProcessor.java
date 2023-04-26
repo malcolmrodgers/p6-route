@@ -27,7 +27,7 @@ public class GraphProcessor {
     private static Point[] points;
 
     //main method for testing
-    public static void main(String[] args) throws Exception{
+    private static void main(String[] args) throws Exception{
         GraphProcessor gp = new GraphProcessor();
         File graphData = new File("data/simple.graph");
         FileInputStream stream = new FileInputStream(graphData);
