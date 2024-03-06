@@ -147,7 +147,7 @@ public class GraphProcessor {
      * @return true if p2 is reachable from p1 (and vice versa)
      */
     public boolean connected(Point p1, Point p2) {
-        HashSet<Point> visited = new HashSet<>();
+        Set<Point> visited = new HashSet<>();
         Stack<Point> myStack = new Stack<>();
 
         myStack.push(p1);
